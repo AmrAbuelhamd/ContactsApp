@@ -1,0 +1,35 @@
+ContactsApp application
+
+1.Создание базового кода проекта:        [estimated time = 5 hours]     [actual time = 00:00 + 00:00 на испровление ] = 00:00
+Создание: самого проекта, модулей, все классы домена.
+Добавление: зависимостей,Nav graph с тремя фрагментами/ViewModels.
+Инициализация app.di пакет.
+
+2.Инициализация data пакет               [estimated time = 4 hour]      [actual time  = 00:00] = 00:00
+Инициализация room. Добавление необходимые dao, Converters, repoImpl.
+
+3.Инициализация searchView               [estimated time = 3 hour]      [actual time  = 00:00] = 00:00
+Добавить тестовые данные в базу данных.
+Получить ключевое слово для поиска и получить отфильтрованный список из ROOM БД.
+
+4.Создание recyclerview с sticky header  [estimated time = 10 hour]     [actual time  = 00:00] = 00:00
+
+5.Добавление ContactDetails экран        [estimated time = 5 hour]      [actual time  = 00:00] = 00:00
+Добавление общей ViewModel для списка контактов и contactDetails
+
+6.Добавление аватара                     [estimated time = 6 hour]      [actual time  = 00:00] = 00:00
+
+7.Создание CreateAndEditContact экран    [estimated time = 13 hour]     [actual time  = 00:00] = 00:00
+Design. Добавление ringtone. Заполнение выпадающего списка данными.
+Сохранение данных.
+
+8.Взаимодействие между экранами          [estimated time = 8 hour]      [actual time  = 00:00] = 00:00
+Изменение иконки UpButton при редактировании. Обработка кнопки back.
+Автозаполнения данные.
+
+total 54 hours  {коэффициент запаса 1.5} = 54*1.5 = 81
+расчетное время для задачи - 54 часов, но в очень плохой ситуации с неожиданными
+проблемами этот проект может занять 81 часов.
+
+TOTAL ACTUAL TIME = 00:00
+                                                                                         TOTAL = 00:00
