@@ -12,7 +12,7 @@ class ContactsListFragment : Fragment() {
 
     private lateinit var binding: ContactsListFragmentBinding
     private val viewModel: ContactsListViewModel by viewModel()
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -5,5 +5,5 @@ import com.example.domain.ContactsDataSource
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    factory { ContactsDataSourceImpl() as ContactsDataSource }
+    factory { ContactsDataSourceImpl(get(),get(),) as ContactsDataSource }
 }
