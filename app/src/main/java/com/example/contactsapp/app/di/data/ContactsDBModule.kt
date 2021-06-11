@@ -10,6 +10,6 @@ val contactsDBModule = module {
             .fallbackToDestructiveMigration()
             .build()
     }
-    factory { get<ContactsDatabase>().userDao() }
-    factory { get<ContactsDatabase>().phoneDao() }
+    single { get<ContactsDatabase>().userDao() }
+    single { get<ContactsDatabase>().phoneDao() }
 }
