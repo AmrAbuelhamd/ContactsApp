@@ -1,14 +1,10 @@
-package com.example.contactsapp.presentation.fragments.contacts_list
+package com.example.contactsapp.presentation.fragments.contactsList
 
 import androidx.lifecycle.*
 import com.example.domain.models.SimpleContact
 import com.example.domain.usecases.GetContacts
-import com.example.domain.usecases.UpdateContact
 
-class ContactsListViewModel(
-    val updateContact: UpdateContact,
-    val getContacts: GetContacts,
-) : ViewModel() {
+class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
 
     private val keyWord: MutableLiveData<String> = MutableLiveData("")
     val contacts: LiveData<List<SimpleContact>> = Transformations.switchMap(keyWord) {
@@ -19,5 +15,4 @@ class ContactsListViewModel(
         if (!keyWord.contentEquals(this.keyWord.value))
             this.keyWord.value = keyWord
     }
-
 }

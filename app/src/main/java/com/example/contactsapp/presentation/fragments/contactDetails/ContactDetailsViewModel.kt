@@ -1,4 +1,4 @@
-package com.example.contactsapp.presentation.fragments.contact_details
+package com.example.contactsapp.presentation.fragments.contactDetails
 
 import androidx.lifecycle.ViewModel
 

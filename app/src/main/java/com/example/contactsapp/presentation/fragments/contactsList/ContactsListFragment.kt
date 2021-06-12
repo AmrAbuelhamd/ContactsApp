@@ -1,4 +1,4 @@
-package com.example.contactsapp.presentation.fragments.contacts_list
+package com.example.contactsapp.presentation.fragments.contactsList
 
 import android.os.Bundle
 import android.view.*
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.contactsapp.R
 import com.example.contactsapp.databinding.ContactsListFragmentBinding
-import com.example.contactsapp.presentation.fragments.contacts_list.recycler.ContactsRecyclerAdapter
-import com.example.contactsapp.presentation.fragments.contacts_list.recycler.HeaderItemDecoration
+import com.example.contactsapp.presentation.fragments.contactsList.recycler.ContactsRecyclerAdapter
+import com.example.contactsapp.presentation.fragments.contactsList.recycler.HeaderItemDecoration
 import com.example.contactsapp.presentation.models.ContactDataItem
 import com.example.domain.models.SimpleContact
 import org.koin.androidx.viewmodel.ext.android.viewModel

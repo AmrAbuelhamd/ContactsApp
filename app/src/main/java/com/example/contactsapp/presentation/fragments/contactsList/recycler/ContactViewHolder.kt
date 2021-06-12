@@ -1,4 +1,4 @@
-package com.example.contactsapp.presentation.fragments.contacts_list.recycler
+package com.example.contactsapp.presentation.fragments.contactsList.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
