@@ -4,7 +4,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactsapp.presentation.models.ContactDataItem
 
-class ContactsRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ContactsRecyclerAdapter(private val clickListener: (Int) -> Unit) :
+    RecyclerView.Adapter<ContactViewHolder>() {
 
     var data = listOf<ContactDataItem>()
         set(value) {
@@ -16,11 +17,11 @@ class ContactsRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         return data.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         return ContactViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ContactViewHolder).bind(data[position])
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        holder.bind(data[position], clickListener)
     }
 }

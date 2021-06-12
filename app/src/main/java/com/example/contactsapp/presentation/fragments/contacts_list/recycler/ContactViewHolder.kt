@@ -9,7 +9,7 @@ import com.example.contactsapp.presentation.models.ContactDataItem
 
 class ContactViewHolder(private val binding: ItemContactBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: ContactDataItem) {
+    fun bind(item: ContactDataItem, clickListener: (Int) -> Unit) {
         with(binding) {
             Glide.with(binding.root.context)
                 .load(item.contact.imgLocalPath)
@@ -17,15 +17,24 @@ class ContactViewHolder(private val binding: ItemContactBinding) :
             nameTextView.text = item.contact.name
             if (item.alphabet != null) {
                 alphabetTextView.text = item.alphabet
-            }else{
+            } else {
                 alphabetTextView.text = ""
+            }
+            root.setOnClickListener {
+                clickListener(item.contact.id)
             }
         }
     }
 
     companion object {
         fun from(parent: ViewGroup): ContactViewHolder {
-            return ContactViewHolder(ItemContactBinding.inflate(LayoutInflater.from(parent.context)))
+            return ContactViewHolder(
+                ItemContactBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
     }
 }

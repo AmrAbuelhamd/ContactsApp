@@ -5,6 +5,7 @@ import android.view.*
 import android.view.View.OnAttachStateChangeListener
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.contactsapp.R
 import com.example.contactsapp.databinding.ContactsListFragmentBinding
 import com.example.contactsapp.presentation.fragments.contacts_list.recycler.ContactsRecyclerAdapter
@@ -18,7 +19,15 @@ class ContactsListFragment : Fragment() {
 
     private lateinit var binding: ContactsListFragmentBinding
     private val viewModel: ContactsListViewModel by viewModel()
-    private val contactsAdapter by lazy { ContactsRecyclerAdapter() }
+    private val contactsAdapter by lazy {
+        ContactsRecyclerAdapter() { id ->
+            findNavController().navigate(
+                ContactsListFragmentDirections
+                    .actionContactsListFragmentToContactDetailsFragment(id)
+            )
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,7 +88,6 @@ class ContactsListFragment : Fragment() {
                 !contactsAdapter.data[it].alphabet.isNullOrBlank()
             } else false
         })
-//        findNavController().navigate(ContactsListFragmentDirections.actionContactsListFragmentToContactDetailsFragment())
     }
 
     private fun updateRecycler(list: List<SimpleContact>?) {
