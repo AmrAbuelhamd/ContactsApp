@@ -17,10 +17,10 @@ interface UserDao {
     fun setAsFavorite(contactId: Int, isFavorite: Int)
 
     @Transaction
-    @Query("SELECT * FROM userentity")
+    @Query("SELECT * FROM userentity order by name")
     fun getAllContacts(): Flow<List<ContactEntity>>
 
     @Transaction
-    @Query("SELECT * FROM userentity where name like :keyWord")
+    @Query("SELECT * FROM userentity where name like :keyWord order by name")
     fun getAllContacts(keyWord: String): Flow<List<ContactEntity>>
 }
