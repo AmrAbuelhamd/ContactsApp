@@ -1,8 +1,9 @@
-package com.example.data.db.models
+package com.example.data.db.models.pojo
 
 import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.Relation
+import com.example.data.db.models.PhoneEntity
+import com.example.data.db.models.UserEntity
 
 data class ContactEntity(
     @Embedded

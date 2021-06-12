@@ -1,4 +1,4 @@
-package com.example.contactsapp.presentation.create_edit_contact
+package com.example.contactsapp.presentation.fragments.createEditContact
 
 import androidx.lifecycle.ViewModel
 
