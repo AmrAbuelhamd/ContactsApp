@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.example.contactsapp.presentation.create_edit_contact.CreateEditContactViewModel" />
+            type="com.example.contactsapp.presentation.ContactsSharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -8,17 +8,18 @@ import com.example.data.utils.toIntValue
 import com.example.domain.ContactsDataSource
 import com.example.domain.models.Contact
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 class ContactsDataSourceImpl(private val userDao: UserDao, private val phoneDao: PhoneDao) :
     ContactsDataSource {
-    override fun getContacts(keyWord: String): Flow<List<Contact>> {
-        return if (keyWord.isBlank())
+    override fun getContacts(keyWord: String?): Flow<List<Contact>> {
+        return if (keyWord.isNullOrBlank())
             userDao.getAllContacts()
-                .map { list -> list.map { it.toDomain() } }
+                .map { list -> list.map { it.toDomain() } }.distinctUntilChanged()
         else
             userDao.getAllContacts("%$keyWord%")
-                .map { list -> list.map { it.toDomain() } }
+                .map { list -> list.map { it.toDomain() } }.distinctUntilChanged()
     }
 
     override suspend fun setAsFavorite(contactId: Int, isFavorite: Boolean) {
