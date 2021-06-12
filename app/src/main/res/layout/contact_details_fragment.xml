@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.contactsapp.presentation.ContactsSharedViewModel" />
+            type="com.example.contactsapp.presentation.fragments.contact_details.ContactDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.contact_details.ContactDetailsFragment">
+        tools:context=".presentation.fragments.contact_details.ContactDetailsFragment">
 
         <TextView
             android:layout_width="match_parent"

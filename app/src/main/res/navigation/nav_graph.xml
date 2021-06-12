@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contactsListFragment"
-        android:name="com.example.contactsapp.presentation.contacts_list.ContactsListFragment"
+        android:name="com.example.contactsapp.presentation.fragments.contacts_list.ContactsListFragment"
         android:label="@string/contacts"
         tools:layout="@layout/contacts_list_fragment" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactDetailsFragment"
-        android:name="com.example.contactsapp.presentation.contact_details.ContactDetailsFragment"
+        android:name="com.example.contactsapp.presentation.fragments.contact_details.ContactDetailsFragment"
         android:label=""
         tools:layout="@layout/contact_details_fragment" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/createEditContactFragment"
-        android:name="com.example.contactsapp.presentation.create_edit_contact.CreateEditContactFragment"
+        android:name="com.example.contactsapp.presentation.fragments.create_edit_contact.CreateEditContactFragment"
         tools:layout="@layout/create_edit_contact_fragment" >
         <argument
             android:name="contactId"

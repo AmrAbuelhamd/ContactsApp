@@ -1,8 +1,10 @@
 package com.example.data.converters
 
-import com.example.data.db.models.ContactEntity
+import com.example.data.db.models.pojo.ContactEntity
+import com.example.data.db.models.pojo.SimpleContactEntity
 import com.example.domain.models.Contact
 import com.example.domain.models.Phone
+import com.example.domain.models.SimpleContact
 
 fun ContactEntity.toDomain() = Contact(
     user.userId,
@@ -14,3 +16,5 @@ fun ContactEntity.toDomain() = Contact(
     user.ringtoneId,
     user.isFavorite
 )
+
+fun SimpleContactEntity.toDomain() = SimpleContact(id, name, imgLocalPath)
