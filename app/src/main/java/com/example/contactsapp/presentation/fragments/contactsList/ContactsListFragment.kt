@@ -1,9 +1,12 @@
 package com.example.contactsapp.presentation.fragments.contactsList
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.view.View.OnAttachStateChangeListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.contactsapp.R
@@ -13,7 +16,6 @@ import com.example.contactsapp.presentation.fragments.contactsList.recycler.Head
 import com.example.contactsapp.presentation.models.ContactDataItem
 import com.example.domain.models.SimpleContact
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class ContactsListFragment : Fragment() {
 
@@ -88,6 +90,12 @@ class ContactsListFragment : Fragment() {
                 !contactsAdapter.data[it].alphabet.isNullOrBlank()
             } else false
         })
+        binding.createContactFloatingActionButton.setOnClickListener {
+            findNavController().navigate(
+                ContactsListFragmentDirections
+                    .actionContactsListFragmentToCreateEditContactFragment()
+            )
+        }
     }
 
     private fun updateRecycler(list: List<SimpleContact>?) {
@@ -107,6 +115,20 @@ class ContactsListFragment : Fragment() {
             }
             contactsAdapter.data = adapterDataList
         }
+        viewModel.changeLoadingState(false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar
+            ?.setBackgroundDrawable(
+                ColorDrawable(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.blue
+                    )
+                )
+            )
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.blue)
+    }
 }

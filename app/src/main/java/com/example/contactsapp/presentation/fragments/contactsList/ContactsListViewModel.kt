@@ -6,9 +6,17 @@ import com.example.domain.usecases.GetContacts
 
 class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
 
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading: LiveData<Boolean> = _loading
+
     private val keyWord: MutableLiveData<String> = MutableLiveData("")
     val contacts: LiveData<List<SimpleContact>> = Transformations.switchMap(keyWord) {
+        _loading.value = true
         getContacts(keyWord.value).asLiveData()
+    }
+
+    fun changeLoadingState(isLoading: Boolean) {
+        _loading.value = isLoading
     }
 
     fun updateSearchKeyWord(keyWord: String) {
