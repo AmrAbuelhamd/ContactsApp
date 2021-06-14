@@ -41,7 +41,7 @@ class ContactsDataSourceImpl(private val userDao: UserDao, private val phoneDao:
         phoneDao.delete(contactId)
     }
 
-    override suspend fun getContactById(contactId: Int):Contact {
-        return userDao.getContactById(contactId).toDomain()
+    override fun getContactById(contactId: Int):Flow<Contact> {
+        return userDao.getContactByIdFlow(contactId).map { it.toDomain() }
     }
 }

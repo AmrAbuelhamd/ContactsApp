@@ -32,6 +32,7 @@
     <fragment
         android:id="@+id/createEditContactFragment"
         android:name="com.example.contactsapp.presentation.fragments.createEditContact.CreateEditContactFragment"
+        android:label=""
         tools:layout="@layout/create_edit_contact_fragment" >
         <argument
             android:name="contactId"
