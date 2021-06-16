@@ -21,8 +21,8 @@
     <string name="pickImageError">something went wrong while picking up the image.</string>
     <string name="somethingWentWrong">something went wrong</string>
     <string name="save">Save</string>
-    <string name="enter_your_number">enter your number</string>
-    <string name="select_phone_type">select phone type</string>
+    <string name="enter_your_number">Phone</string>
+    <string name="select_phone_type">Type</string>
     <string name="savedSuccessfully">Saved successfully</string>
     <string name="deletedSuccessfully">Deleted successfully</string>
     <string name="pickImagePlease">Pick image please</string>

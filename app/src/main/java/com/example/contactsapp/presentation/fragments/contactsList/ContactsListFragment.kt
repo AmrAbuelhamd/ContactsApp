@@ -102,8 +102,7 @@ class ContactsListFragment : Fragment() {
         list?.let {
             val adapterDataList = mutableListOf<ContactRecyclerDataItem>()
             if (it.isNotEmpty()) {
-                var prevChar = it[0].name[0]
-                adapterDataList.add(ContactRecyclerDataItem(it[0], prevChar.toString()))
+                var prevChar = (it[0].name[0].code + 1).toChar()
                 it.forEach { contact ->
                     if (contact.name[0] != prevChar) {
                         prevChar = contact.name[0]

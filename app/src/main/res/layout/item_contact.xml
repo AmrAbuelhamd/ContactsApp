@@ -19,9 +19,9 @@
         <TextView
             android:id="@+id/alphabetTextView"
             android:layout_width="40dp"
+            android:layout_height="40dp"
             android:gravity="center"
             android:textAllCaps="true"
-            android:layout_height="wrap_content"
             tools:text="A"
             android:textColor="#61000000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toEndOf="@id/contactImageView"
             app:layout_constraintTop_toTopOf="@id/contactImageView"
             app:layout_constrainedWidth="true"
-            tools:text="amr mohamed" />
+            tools:text="name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
