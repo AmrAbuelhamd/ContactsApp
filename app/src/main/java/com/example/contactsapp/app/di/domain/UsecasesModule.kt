@@ -8,5 +8,6 @@ val useCasesModule = module {
     factory { DeleteContactImpl(get()) as DeleteContact }
     factory { GetContactsImpl(get()) as GetContacts }
     factory { SetAsFavoriteImpl(get()) as SetAsFavorite }
+    factory { GetContactByIdFlowImpl(get()) as GetContactByIdFlow }
     factory { GetContactByIdImpl(get()) as GetContactById }
 }

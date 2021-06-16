@@ -11,6 +11,6 @@ data class UserEntity(
     val imgLocalPath: String,
     val email: String,
     val note: String,
-    val ringtoneId: Int,
+    val ringtone: String,
     val isFavorite:Boolean
 )

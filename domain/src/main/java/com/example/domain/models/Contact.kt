@@ -7,6 +7,6 @@ data class Contact(
     val phoneNumbers: List<Phone>,
     val email: String,
     val note: String,
-    val ringtoneId: Int,
+    val ringtone: String,
     val isFavorite: Boolean
 )

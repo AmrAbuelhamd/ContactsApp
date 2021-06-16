@@ -13,7 +13,7 @@ fun ContactEntity.toDomain() = Contact(
     phones.map { Phone(it.phoneId, it.phone, it.type) },
     user.email,
     user.note,
-    user.ringtoneId,
+    user.ringtone,
     user.isFavorite
 )
 

@@ -42,10 +42,10 @@ class ContactDetailsFragment : Fragment() {
 
                 contactDetailsFragmentPhoneNumberTextView.text = it.phoneNumbers[0].phone
                 contactDetailsFragmentPhoneTypeTextView.text =
-                    resources.getStringArray(R.array.phone_number_type)[it.phoneNumbers[0].type]
+                    it.phoneNumbers[0].type
 
-//                contactDetailsFragmentPhoneNumberSecondTextView.text = it.phoneNumbers[1].phone
-//                contactDetailsFragmentPhoneTypeSecondTextView.text = resources.getStringArray(R.array.phone_number_type)[it.phoneNumbers[1].type]
+                contactDetailsFragmentPhoneNumberSecondTextView.text = it.phoneNumbers[1].phone
+                contactDetailsFragmentPhoneTypeSecondTextView.text = it.phoneNumbers[1].type
 
                 isFavoriteMenuItem?.isChecked = it.isFavorite
                 if (it.isFavorite)

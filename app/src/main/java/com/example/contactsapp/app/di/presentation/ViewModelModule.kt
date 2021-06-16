@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { ContactDetailsViewModel(get(),get()) }
     viewModel { ContactsListViewModel(get()) }
-    viewModel { CreateEditContactViewModel() }
+    viewModel { CreateEditContactViewModel(get(),get(),get(),) }
 }

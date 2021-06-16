@@ -2,13 +2,13 @@ package com.example.contactsapp.presentation.fragments.contactDetails
 
 import androidx.lifecycle.*
 import com.example.domain.models.Contact
-import com.example.domain.usecases.GetContactById
+import com.example.domain.usecases.GetContactByIdFlow
 import com.example.domain.usecases.SetAsFavorite
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ContactDetailsViewModel(
-    private val getContactById: GetContactById,
+    private val getContactByIdFlow: GetContactByIdFlow,
     private val setAsFavorite: SetAsFavorite,
 ) : ViewModel() {
 
@@ -18,7 +18,7 @@ class ContactDetailsViewModel(
             MutableLiveData()
         else {
             _loading.postValue(true)
-            getContactById(id).asLiveData()
+            getContactByIdFlow(id).asLiveData()
         }
     }
 

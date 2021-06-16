@@ -9,5 +9,5 @@ data class PhoneEntity(
     val phoneId: Int,
     val phoneOwnerId:Int,
     val phone: String,
-    val type: Int
+    val type: String
 )

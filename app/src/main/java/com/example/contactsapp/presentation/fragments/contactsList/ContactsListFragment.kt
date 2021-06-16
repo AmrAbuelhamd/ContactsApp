@@ -13,7 +13,7 @@ import com.example.contactsapp.R
 import com.example.contactsapp.databinding.ContactsListFragmentBinding
 import com.example.contactsapp.presentation.fragments.contactsList.recycler.ContactsRecyclerAdapter
 import com.example.contactsapp.presentation.fragments.contactsList.recycler.HeaderItemDecoration
-import com.example.contactsapp.presentation.models.ContactDataItem
+import com.example.contactsapp.presentation.models.ContactRecyclerDataItem
 import com.example.domain.models.SimpleContact
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -100,16 +100,16 @@ class ContactsListFragment : Fragment() {
 
     private fun updateRecycler(list: List<SimpleContact>?) {
         list?.let {
-            val adapterDataList = mutableListOf<ContactDataItem>()
+            val adapterDataList = mutableListOf<ContactRecyclerDataItem>()
             if (it.isNotEmpty()) {
                 var prevChar = it[0].name[0]
-                adapterDataList.add(ContactDataItem(it[0], prevChar.toString()))
+                adapterDataList.add(ContactRecyclerDataItem(it[0], prevChar.toString()))
                 it.forEach { contact ->
                     if (contact.name[0] != prevChar) {
                         prevChar = contact.name[0]
-                        adapterDataList.add(ContactDataItem(contact, prevChar.toString()))
+                        adapterDataList.add(ContactRecyclerDataItem(contact, prevChar.toString()))
                     } else {
-                        adapterDataList.add(ContactDataItem(contact))
+                        adapterDataList.add(ContactRecyclerDataItem(contact))
                     }
                 }
             }
