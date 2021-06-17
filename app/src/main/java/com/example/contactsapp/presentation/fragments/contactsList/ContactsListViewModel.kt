@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class ContactsListViewModel(
     private val getContacts: GetContacts,
-//    private val updateContact: UpdateContact
+    private val updateContact: UpdateContact
 ) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>(false)
@@ -23,7 +23,7 @@ class ContactsListViewModel(
         getContacts(keyWord.value).asLiveData()
     }
 
-/*
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             for (i in 1..20) {
@@ -96,7 +96,7 @@ class ContactsListViewModel(
             }
         }
     }
-*/
+
 
     fun changeLoadingState(isLoading: Boolean) {
         _loading.value = isLoading
