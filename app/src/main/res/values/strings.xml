@@ -15,8 +15,8 @@
     <string name="type_your_note">type note</string>
     <string name="choose_your_ringtone">choose your ringtone</string>
     <string name="addPhoto">Add photo</string>
-    <string name="open_gallery">open gallery</string>
-    <string name="openCamera">open camera</string>
+    <string name="open_gallery">choose photo</string>
+    <string name="openCamera">take photo</string>
     <string name="takeImageError">something went wrong while taking image.</string>
     <string name="pickImageError">something went wrong while picking up the image.</string>
     <string name="somethingWentWrong">something went wrong</string>
