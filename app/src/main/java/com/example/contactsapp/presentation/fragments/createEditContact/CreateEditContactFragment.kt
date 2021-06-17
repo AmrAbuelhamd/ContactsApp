@@ -64,13 +64,6 @@ class CreateEditContactFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arg.contactId != -1) {
-            viewModel.setContactItemId(arg.contactId)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,16 +73,19 @@ class CreateEditContactFragment : Fragment() {
             it.lifecycleOwner = this
             it.viewModel = viewModel
         }
+        setUpViews()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViews()
-        setViewModeObservers()
+        setViewModelObservers()
+        if (arg.contactId != -1) {
+            viewModel.setContactItemId(arg.contactId)
+        }
     }
 
-    private fun setViewModeObservers() {
+    private fun setViewModelObservers() {
         viewModel.imageUri.observe(viewLifecycleOwner, ::setImageViewFromString)
         viewModel.saveSuccess.observe(viewLifecycleOwner, {
             showError(R.string.savedSuccessfully)
