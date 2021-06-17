@@ -7,6 +7,7 @@ import com.example.domain.usecases.GetContactByIdFlow
 import com.example.domain.usecases.SetAsFavorite
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class ContactDetailsViewModel(
@@ -15,12 +16,12 @@ class ContactDetailsViewModel(
 ) : ViewModel() {
 
     private val contactId = MutableLiveData(-1)
-    val contact: LiveData<Contact> = contactId.switchMap { id ->
+    val contact: LiveData<Contact?> = contactId.switchMap { id ->
         if (id == -1)
             MutableLiveData()
         else {
             _loading.postValue(true)
-            getContactByIdFlow(id).asLiveData()
+            getContactByIdFlow(id).catch { it.printStackTrace() }.asLiveData()
         }
     }
 

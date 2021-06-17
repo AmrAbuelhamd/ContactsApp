@@ -47,6 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_person_add"
+            app:borderWidth="0dp"
             app:tint="@android:color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

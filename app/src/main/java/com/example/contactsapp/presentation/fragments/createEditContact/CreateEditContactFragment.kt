@@ -97,7 +97,7 @@ class CreateEditContactFragment : Fragment() {
         })
         viewModel.deleteSuccess.observe(viewLifecycleOwner, {
             showError(R.string.deletedSuccessfully)
-            findNavController().popBackStack(R.id.contactsListFragment, false)
+            findNavController().popBackStack()
         })
         viewModel.error.observe(viewLifecycleOwner, ::showError)
     }

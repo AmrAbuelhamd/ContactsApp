@@ -17,13 +17,6 @@ class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
         getContacts(keyWord.value).asLiveData()
     }
 
-    private val _error = MutableLiveData<Int>(0)
-    val error: LiveData<Int> = _error
-
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        _error.postValue(R.string.somethingWentWrong)
-    }
-
     fun changeLoadingState(isLoading: Boolean) {
         _loading.value = isLoading
     }

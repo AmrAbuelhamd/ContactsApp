@@ -105,7 +105,6 @@ class ContactsListFragment : Fragment() {
 
     private fun setViewModelObservers() {
         viewModel.contacts.observe(viewLifecycleOwner, ::updateRecycler)
-        viewModel.error.observe(viewLifecycleOwner, ::showError)
     }
 
     private fun updateRecycler(list: List<SimpleContact>?) {
