@@ -25,7 +25,7 @@ interface UserDao {
     @Query("SELECT * FROM userentity where userId like :contactId")
     fun getContactByIdFlow(contactId: Int): Flow<ContactEntity>
 
-    @Query("SELECT userId as id, name, imgLocalPath FROM userentity order by name")
+    @Query("SELECT userId as id, name, imgLocalPath FROM userentity order by LOWER(name) asc")
     fun getAllContacts(): Flow<List<SimpleContactEntity>>
 
     @Query("SELECT userId as id, name, imgLocalPath FROM userentity where name like :keyWord order by name")

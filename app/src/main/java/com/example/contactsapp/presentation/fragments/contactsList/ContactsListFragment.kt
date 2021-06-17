@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.view.View.OnAttachStateChangeListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -83,19 +84,28 @@ class ContactsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.contacts.observe(viewLifecycleOwner, ::updateRecycler)
-        binding.contactsRecyclerView.adapter = contactsAdapter
-        binding.contactsRecyclerView.addItemDecoration(HeaderItemDecoration(binding.contactsRecyclerView) {
+        setViewModelObservers()
+        setUpViews()
+    }
+
+    private fun setUpViews() = with(binding) {
+        contactsRecyclerView.adapter = contactsAdapter
+        contactsRecyclerView.addItemDecoration(HeaderItemDecoration(contactsRecyclerView) {
             if (it >= 0 && it < contactsAdapter.itemCount) {
                 !contactsAdapter.data[it].alphabet.isNullOrBlank()
             } else false
         })
-        binding.createContactFloatingActionButton.setOnClickListener {
+        createContactFloatingActionButton.setOnClickListener {
             findNavController().navigate(
                 ContactsListFragmentDirections
                     .actionContactsListFragmentToCreateEditContactFragment()
             )
         }
+    }
+
+    private fun setViewModelObservers() {
+        viewModel.contacts.observe(viewLifecycleOwner, ::updateRecycler)
+        viewModel.error.observe(viewLifecycleOwner, ::showError)
     }
 
     private fun updateRecycler(list: List<SimpleContact>?) {
@@ -129,5 +139,10 @@ class ContactsListFragment : Fragment() {
                 )
             )
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.blue)
+    }
+
+    private fun showError(errorId: Int) {
+        if (errorId != 0)
+            Toast.makeText(requireContext(), getString(errorId), Toast.LENGTH_SHORT).show()
     }
 }

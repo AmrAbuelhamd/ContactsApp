@@ -3,6 +3,7 @@ package com.example.contactsapp.presentation.fragments.createEditContact
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -25,6 +26,7 @@ import com.example.contactsapp.presentation.utils.ImageUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class CreateEditContactFragment : Fragment() {
 
@@ -130,6 +132,12 @@ class CreateEditContactFragment : Fragment() {
             changeAvatarButton.setOnClickListener {
                 initPickImageBottomSheet()
             }
+            createEditFragmentPhoneNumberOne.editText?.addTextChangedListener(
+                PhoneNumberFormattingTextWatcher()
+            )
+            createEditFragmentPhoneNumberSecond.editText?.addTextChangedListener(
+                PhoneNumberFormattingTextWatcher()
+            )
         }
         if (arg.contactId != -1) {
             binding.saveButton.isVisible = false

@@ -1,8 +1,10 @@
 package com.example.contactsapp.presentation.fragments.contactsList
 
 import androidx.lifecycle.*
+import com.example.contactsapp.R
 import com.example.domain.models.SimpleContact
 import com.example.domain.usecases.GetContacts
+import kotlinx.coroutines.CoroutineExceptionHandler
 
 class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
 
@@ -13,6 +15,13 @@ class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
     val contacts: LiveData<List<SimpleContact>> = Transformations.switchMap(keyWord) {
         _loading.value = true
         getContacts(keyWord.value).asLiveData()
+    }
+
+    private val _error = MutableLiveData<Int>(0)
+    val error: LiveData<Int> = _error
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        _error.postValue(R.string.somethingWentWrong)
     }
 
     fun changeLoadingState(isLoading: Boolean) {

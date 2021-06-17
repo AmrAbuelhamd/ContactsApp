@@ -9,8 +9,8 @@ import com.example.data.db.models.PhoneEntity
 @Dao
 interface PhoneDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(phoneEntity: List<PhoneEntity>)
+    suspend fun insert(phoneEntity: List<PhoneEntity>)
 
     @Query("delete from phoneentity where phoneOwnerId like :contactId")
-    fun delete(contactId: Int)
+    suspend fun delete(contactId: Int)
 }

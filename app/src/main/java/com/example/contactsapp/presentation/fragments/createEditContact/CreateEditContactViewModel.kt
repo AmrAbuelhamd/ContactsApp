@@ -13,6 +13,7 @@ import com.example.contactsapp.presentation.utils.SingleLiveEvent
 import com.example.domain.usecases.DeleteContact
 import com.example.domain.usecases.GetContactById
 import com.example.domain.usecases.UpdateContact
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -42,9 +43,14 @@ class CreateEditContactViewModel(
     private val _error = MutableLiveData<Int>(0)
     val error: LiveData<Int> = _error
 
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        exception.printStackTrace()
+        _error.postValue(R.string.somethingWentWrong)
+    }
+
     fun setContactItemId(contactId: Int) {
         this.contactId = contactId
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             _loading.postValue(true)
             getContactById(contactId).also {
                 _imageUri.postValue(it.imgLocalPath)
@@ -66,7 +72,7 @@ class CreateEditContactViewModel(
     fun saveData() {
         if (inputIsValid()) {
             _error.value = 0
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch(Dispatchers.IO + handler) {
                 updateContact(contact.value!!.toDomain())
                 _saveSuccess.postValue(null)
             }
@@ -75,7 +81,7 @@ class CreateEditContactViewModel(
 
     fun deleteContact() {
         if (contactId != -1) {
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO + handler) {
                 deleteContact(contactId)
                 _deleteSuccess.postValue(null)
             }
