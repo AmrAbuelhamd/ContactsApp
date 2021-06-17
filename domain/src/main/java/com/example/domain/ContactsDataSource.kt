@@ -9,5 +9,6 @@ interface ContactsDataSource {
     suspend fun setAsFavorite(contactId: Int, isFavorite: Boolean)
     suspend fun updateContact(contact: Contact)
     suspend fun deleteContact(contactId: Int)
-    fun getContactById(contactId: Int): Flow<Contact>
+    fun getContactByIdFlow(contactId: Int): Flow<Contact?>
+    suspend fun getContactById(contactId: Int): Contact
 }

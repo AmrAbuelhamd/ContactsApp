@@ -1,11 +1,17 @@
 package com.example.contactsapp.presentation.fragments.contactsList.recycler
 
-import android.graphics.*
+
+import android.graphics.Canvas
+import android.graphics.Rect
+import android.graphics.RectF
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.contactsapp.R
+import com.google.android.material.imageview.ShapeableImageView
 
 class HeaderItemDecoration(
     parent: RecyclerView,
@@ -33,29 +39,26 @@ class HeaderItemDecoration(
                 recyclerView: RecyclerView,
                 motionEvent: MotionEvent
             ): Boolean {
-                return if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                    motionEvent.y <= currentHeader?.second?.itemView?.bottom ?: 0
-                } else false
+                return false
             }
         })
     }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
-        val ss = Paint()
-        ss.color = Color.GRAY
-        ss.textSize = 150F
-        //val topChild = parent.getChildAt(0) ?: return
         val topChild = parent.findChildViewUnder(
             parent.paddingLeft.toFloat(),
-            parent.paddingTop.toFloat() /*+ (currentHeader?.second?.itemView?.height ?: 0 )*/
+            parent.paddingTop.toFloat()
         ) ?: return
         val topChildPosition = parent.getChildAdapterPosition(topChild)
         if (topChildPosition == RecyclerView.NO_POSITION) {
             return
         }
 
+        //hide the image and the name, and draw only the alphabet
         val headerView = getHeaderViewForItem(topChildPosition, parent) ?: return
+        headerView.findViewById<ShapeableImageView>(R.id.contactImageView).isVisible = false
+        headerView.findViewById<TextView>(R.id.nameTextView).isVisible = false
 
         val contactPoint = headerView.bottom + parent.paddingTop
         val childInContact = getChildInContact(parent, contactPoint) ?: return
@@ -116,7 +119,7 @@ class HeaderItemDecoration(
             }
 
         }
-        c.translate(0f, (nextHeader.top - currentHeader.height).toFloat() /*+ paddingTop*/)
+        c.translate(0f, (nextHeader.top - currentHeader.height).toFloat())
 
         currentHeader.draw(c)
         if (shouldFadeOutHeader) {
@@ -148,6 +151,7 @@ class HeaderItemDecoration(
      * @param parent ViewGroup: RecyclerView in this case.
      */
     private fun fixLayoutSize(parent: ViewGroup, view: View) {
+
         // Specs for parent (RecyclerView)
         val widthSpec = View.MeasureSpec.makeMeasureSpec(parent.width, View.MeasureSpec.EXACTLY)
         val heightSpec =
@@ -157,12 +161,12 @@ class HeaderItemDecoration(
         val childWidthSpec = ViewGroup.getChildMeasureSpec(
             widthSpec,
             parent.paddingLeft + parent.paddingRight,
-            /*view.layoutParams?.width ?: 0*/250
+            view.layoutParams.width
         )
         val childHeightSpec = ViewGroup.getChildMeasureSpec(
             heightSpec,
             parent.paddingTop + parent.paddingBottom,
-            /*view.layoutParams?.height ?: 0*/ 160
+            view.layoutParams.height
         )
 
         view.measure(childWidthSpec, childHeightSpec)

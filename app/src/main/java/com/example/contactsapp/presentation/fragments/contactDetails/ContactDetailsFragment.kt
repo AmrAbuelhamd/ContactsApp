@@ -1,18 +1,21 @@
 package com.example.contactsapp.presentation.fragments.contactDetails
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.contactsapp.R
 import com.example.contactsapp.databinding.ContactDetailsFragmentBinding
 import com.example.domain.models.Contact
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class ContactDetailsFragment : Fragment() {
 
@@ -27,35 +30,21 @@ class ContactDetailsFragment : Fragment() {
     }
 
     private fun setViewModelListeners() {
-        viewModel.contact.observe(viewLifecycleOwner, ::setContactInfo)
+        viewModel.error.observe(viewLifecycleOwner, ::showError)
+        viewModel.contact.observe(viewLifecycleOwner, ::setIsFavorite)
     }
 
-    private fun setContactInfo(contact: Contact?) {
+    private fun setIsFavorite(contact: Contact?) {
         viewModel.changeLoadingState(false)
         contact?.let {
-            with(binding) {
-                contactDetailsFragmentEmailTextView.text = it.email
-                Glide.with(requireContext())
-                    .load(it.imgLocalPath)
-                    .into(contactDetailsFragmentImageView)
-                contactDetailsFragmentNameTextView.text = it.name
-
-                contactDetailsFragmentPhoneNumberTextView.text = it.phoneNumbers[0].phone
-                contactDetailsFragmentPhoneTypeTextView.text =
-                    resources.getStringArray(R.array.phone_number_type)[it.phoneNumbers[0].type]
-
-//                contactDetailsFragmentPhoneNumberSecondTextView.text = it.phoneNumbers[1].phone
-//                contactDetailsFragmentPhoneTypeSecondTextView.text = resources.getStringArray(R.array.phone_number_type)[it.phoneNumbers[1].type]
-
-                isFavoriteMenuItem?.isChecked = it.isFavorite
-                if (it.isFavorite)
-                    isFavoriteMenuItem?.setIcon(R.drawable.ic_star)
-                else
-                    isFavoriteMenuItem?.setIcon(R.drawable.ic_star_off)
-
-            }
+            isFavoriteMenuItem?.isChecked = it.isFavorite
+            if (it.isFavorite)
+                isFavoriteMenuItem?.setIcon(R.drawable.ic_star)
+            else
+                isFavoriteMenuItem?.setIcon(R.drawable.ic_star_off)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,12 +60,63 @@ class ContactDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setClickListeners() {
-        binding.editContactFloatingActionButton.setOnClickListener {
+    private fun setClickListeners() = with(binding) {
+        editContactFloatingActionButton.setOnClickListener {
             findNavController().navigate(
                 ContactDetailsFragmentDirections
                     .actionContactDetailsFragmentToCreateEditContactFragment(args.contactId)
             )
+        }
+        firstNumberCallIcon.setOnClickListener {
+            dialPhoneNumber(contactDetailsFragmentPhoneNumberTextView.text.toString())
+        }
+        secondNumberCallIcon.setOnClickListener {
+            dialPhoneNumber(contactDetailsFragmentPhoneNumberSecondTextView.text.toString())
+        }
+        firstNumberMessageIcon.setOnClickListener {
+            composeMmsMessage(contactDetailsFragmentPhoneNumberTextView.text.toString())
+        }
+        secondNumberMessageIcon.setOnClickListener {
+            composeMmsMessage(contactDetailsFragmentPhoneNumberSecondTextView.text.toString())
+        }
+        emailView.setOnClickListener {
+            composeEmail(contactDetailsFragmentEmailTextView.text.toString())
+        }
+    }
+
+    private fun dialPhoneNumber(phoneNumber: String) {
+        kotlin.runCatching {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$phoneNumber")
+            }
+            startActivity(intent)
+        }.onFailure {
+            it.printStackTrace()
+            showError(R.string.somethingWentWrong)
+        }
+    }
+
+    private fun composeMmsMessage(phoneNumber: String) {
+        kotlin.runCatching {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("sms:$phoneNumber")
+            }
+            startActivity(intent)
+        }.onFailure {
+            it.printStackTrace()
+            showError(R.string.somethingWentWrong)
+        }
+    }
+
+    private fun composeEmail(email: String) {
+        kotlin.runCatching {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$email")
+            }
+            startActivity(intent)
+        }.onFailure {
+            it.printStackTrace()
+            showError(R.string.somethingWentWrong)
         }
     }
 
@@ -107,5 +147,10 @@ class ContactDetailsFragment : Fragment() {
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.grey)
         (requireActivity() as AppCompatActivity).supportActionBar
             ?.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+    }
+
+    private fun showError(errorId: Int) {
+        if (errorId != 0)
+            Toast.makeText(requireContext(), getString(errorId), Toast.LENGTH_SHORT).show()
     }
 }

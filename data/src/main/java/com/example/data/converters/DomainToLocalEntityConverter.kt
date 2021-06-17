@@ -6,6 +6,6 @@ import com.example.data.db.models.UserEntity
 import com.example.domain.models.Contact
 
 fun Contact.toLocalEntity() = ContactEntity(
-    UserEntity(id, name, imgLocalPath, email, note, ringtoneId, isFavorite),
+    UserEntity(id, name, imgLocalPath, email, note, ringtone, isFavorite),
     phoneNumbers.map { PhoneEntity(it.id, id, it.phone, it.type) }
 )

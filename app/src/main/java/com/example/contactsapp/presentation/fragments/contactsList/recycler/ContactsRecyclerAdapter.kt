@@ -2,12 +2,12 @@ package com.example.contactsapp.presentation.fragments.contactsList.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contactsapp.presentation.models.ContactDataItem
+import com.example.contactsapp.presentation.models.ContactRecyclerDataItem
 
 class ContactsRecyclerAdapter(private val clickListener: (Int) -> Unit) :
     RecyclerView.Adapter<ContactViewHolder>() {
 
-    var data = listOf<ContactDataItem>()
+    var data = listOf<ContactRecyclerDataItem>()
         set(value) {
             field = value
             notifyDataSetChanged()

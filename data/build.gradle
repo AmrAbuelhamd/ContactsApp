@@ -34,9 +34,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
     //room
     implementation "androidx.room:room-runtime:$room_version"
-    implementation project(path: ':domain')
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 

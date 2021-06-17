@@ -27,15 +27,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/contactDetailsFragmentImageView"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/contact_photo_description"
+            android:scaleType="centerCrop"
+            app:glideSrc="@{viewModel.contact.imgLocalPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -44,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingBottom="16dp"
+            android:text="@{viewModel.contact.name}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -67,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
+            android:text="@{viewModel.contact.phoneNumbers.get(0).phone}"
             app:layout_constraintBottom_toTopOf="@id/contactDetailsFragmentPhoneTypeTextView"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2"
@@ -77,28 +82,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
+            android:text="@{viewModel.contact.phoneNumbers.get(0).type}"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/contactDetailsFragmentPhoneNumberTextView"
             tools:text="home" />
 
         <ImageView
-            android:id="@+id/videoChatIcon"
+            android:id="@+id/firstNumberMessageIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             android:src="@drawable/ic_chat_bubble_outline"
             app:layout_constraintBottom_toBottomOf="@id/contactDetailsFragmentPhoneTypeTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/contactDetailsFragmentPhoneNumberTextView" />
 
         <ImageView
+            android:id="@+id/firstNumberCallIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             android:src="@drawable/ic_videocam"
             app:layout_constraintBottom_toBottomOf="@id/contactDetailsFragmentPhoneTypeTextView"
-            app:layout_constraintEnd_toStartOf="@+id/videoChatIcon"
+            app:layout_constraintEnd_toStartOf="@+id/firstNumberMessageIcon"
             app:layout_constraintTop_toTopOf="@id/contactDetailsFragmentPhoneNumberTextView" />
 
         <ImageView
@@ -116,6 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
+            android:text="@{viewModel.contact.phoneNumbers.get(1).phone}"
             app:layout_constraintBottom_toTopOf="@id/contactDetailsFragmentPhoneTypeSecondTextView"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
@@ -126,28 +142,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
+            android:text="@{viewModel.contact.phoneNumbers.get(0).type}"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/contactDetailsFragmentPhoneNumberSecondTextView"
             tools:text="home" />
 
         <ImageView
-            android:id="@+id/videoChatIconSecond"
+            android:id="@+id/secondNumberMessageIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             android:src="@drawable/ic_chat_bubble_outline"
             app:layout_constraintBottom_toBottomOf="@id/contactDetailsFragmentPhoneTypeSecondTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/contactDetailsFragmentPhoneNumberSecondTextView" />
 
         <ImageView
+            android:id="@+id/secondNumberCallIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
             android:src="@drawable/ic_videocam"
             app:layout_constraintBottom_toBottomOf="@id/contactDetailsFragmentPhoneTypeSecondTextView"
-            app:layout_constraintEnd_toStartOf="@+id/videoChatIconSecond"
+            app:layout_constraintEnd_toStartOf="@+id/secondNumberMessageIcon"
             app:layout_constraintTop_toTopOf="@id/contactDetailsFragmentPhoneNumberSecondTextView" />
 
         <View
@@ -167,6 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            android:padding="4dp"
             android:src="@drawable/ic_mail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lineSeparator" />
@@ -176,10 +203,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:text="@{viewModel.contact.email}"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView"
             tools:text="TextView" />
+
+        <View
+            android:id="@+id/emailView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineSeparator" />
 
         <View
             android:id="@+id/view"
