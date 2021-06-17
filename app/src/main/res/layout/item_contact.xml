@@ -8,53 +8,53 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/alphabetTextView"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textAllCaps="true"
-            tools:text="A"
             android:textColor="#61000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="24dp"
             android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="16dp"
-            />
+            tools:text="A" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/contactImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@color/black"
             android:layout_marginStart="32dp"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/alphabetTextView"
             app:layout_constraintStart_toEndOf="@+id/alphabetTextView"
             app:layout_constraintTop_toTopOf="@id/alphabetTextView"
-            app:layout_constraintBottom_toBottomOf="@id/alphabetTextView"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:srcCompat="@color/black" />
 
         <TextView
             android:id="@+id/nameTextView"
-            android:textColor="#DE000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textColor="#DE000000"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="@id/contactImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/contactImageView"
             app:layout_constraintTop_toTopOf="@id/contactImageView"
-            app:layout_constrainedWidth="true"
             tools:text="name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

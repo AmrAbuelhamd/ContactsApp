@@ -1,10 +1,8 @@
 package com.example.contactsapp.presentation.fragments.contactsList
 
 import androidx.lifecycle.*
-import com.example.contactsapp.R
 import com.example.domain.models.SimpleContact
 import com.example.domain.usecases.GetContacts
-import kotlinx.coroutines.CoroutineExceptionHandler
 
 class ContactsListViewModel(val getContacts: GetContacts) : ViewModel() {
 

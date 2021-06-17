@@ -1,6 +1,5 @@
 package com.example.domain.usecases
 
-import com.example.domain.models.Contact
 import com.example.domain.models.SimpleContact
 import kotlinx.coroutines.flow.Flow
 

@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { ContactDetailsViewModel(get(),get()) }
+    viewModel { ContactDetailsViewModel(get(), get()) }
     viewModel { ContactsListViewModel(get()) }
-    viewModel { CreateEditContactViewModel(get(),get(),get(),) }
+    viewModel { CreateEditContactViewModel(get(), get(), get()) }
 }

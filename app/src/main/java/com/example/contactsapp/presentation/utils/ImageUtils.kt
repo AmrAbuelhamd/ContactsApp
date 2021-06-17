@@ -13,10 +13,11 @@ import java.io.IOException
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
 object ImageUtils {
-    lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoPath: String
 
     @Throws(IOException::class)
     fun createImageFile(context: Context): File? {
@@ -90,8 +91,8 @@ object ImageUtils {
         if (height > reqHeight || width > reqWidth) {
 
             // Calculate ratios of height and width to requested height and width
-            val heightRatio = Math.round(height.toFloat() / reqHeight.toFloat())
-            val widthRatio = Math.round(width.toFloat() / reqWidth.toFloat())
+            val heightRatio = (height.toFloat() / reqHeight.toFloat()).roundToInt()
+            val widthRatio = (width.toFloat() / reqWidth.toFloat()).roundToInt()
 
             // Choose the smallest ratio as inSampleSize value, this will guarantee a final image
             // with both dimensions larger than or equal to the requested height and width.
@@ -123,12 +124,8 @@ object ImageUtils {
     @Throws(IOException::class)
     private fun rotateImageIfRequired(context: Context, img: Bitmap, selectedImage: Uri): Bitmap? {
         val input = context.contentResolver.openInputStream(selectedImage)
-        val ei: ExifInterface
-        if (Build.VERSION.SDK_INT > 23) ei = ExifInterface(input!!) else ei =
-            ExifInterface(selectedImage.path!!)
-        val orientation: Int =
-            ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-        return when (orientation) {
+        val ei: ExifInterface = if (Build.VERSION.SDK_INT > 23) ExifInterface(input!!) else ExifInterface(selectedImage.path!!)
+        return when (ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
             ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(img, 90)
             ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(img, 180)
             ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(img, 270)
