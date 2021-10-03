@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">ContactsApp</string>
+    <string name="search_contacts">search contacts</string>
+    <string name="more">more</string>
+    <string name="contacts">Contacts</string>
+    <string name="contact_photo_description">Contact photo</string>
+    <string name="edit_contact">Edit Contact</string>
+    <string name="favorite">Favorite</string>
+    <string name="create_contact">Create Contact</string>
+    <string name="delete">Delete</string>
+    <string name="change">Change</string>
+    <string name="choose_phone_type">choose phone type</string>
+    <string name="type_your_name">type your name</string>
+    <string name="type_your_email">type your email</string>
+    <string name="type_your_note">type note</string>
+    <string name="choose_your_ringtone">choose your ringtone</string>
+    <string name="addPhoto">Add photo</string>
+    <string name="open_gallery">choose photo</string>
+    <string name="openCamera">take photo</string>
+    <string name="takeImageError">something went wrong while taking image.</string>
+    <string name="pickImageError">something went wrong while picking up the image.</string>
+    <string name="somethingWentWrong">something went wrong</string>
+    <string name="save">Save</string>
+    <string name="enter_your_number">Phone</string>
+    <string name="select_phone_type">Type</string>
+    <string name="savedSuccessfully">Saved successfully</string>
+    <string name="deletedSuccessfully">Deleted successfully</string>
+    <string name="pickImagePlease">Pick image please</string>
+
+    <string-array name="phone_number_type">
+        <item>Mobile</item>
+        <item>Home</item>
+    </string-array>
+
+    <string-array name="ringtones">
+        <item>first ringtone</item>
+        <item>second ringtone</item>
+        <item>third ringtone</item>
+        <item>fourth ringtone</item>
+        <item>fifth ringtone</item>
+        <item>sixth ringtone</item>
+    </string-array>
 </resources>
